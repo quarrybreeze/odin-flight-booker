@@ -1,0 +1,18 @@
+<h1>Flights#index</h1>
+<p>Find me in app/views/flights/index.html.erb</p>
+
+<%= form_with url: flights_path, method: :get do |form|  %>
+  <%= form.label :departure_airport_id%>
+  <%= form.select(:departure_airport_id, @departing_airport_options) %> <br>
+
+  <%= form.label :arrival_airport_id%>
+  <%= form.select(:arrival_airport_id, @arriving_airport_options) %> <br>
+
+  <%= form.label "Number of Passengers" %>
+  <%= form.select :num_tickets, options_for_select(1..4) %> <br>
+
+  <%= form.label "Departure Date" %>
+  <%= form.select(:start, @departure_date_options) %> <br>
+
+  <%= form.submit "Search" %>
+<% end %>
