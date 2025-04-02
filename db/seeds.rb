@@ -15,6 +15,7 @@ yul = Airport.find_or_create_by!(iata: "YUL")
 
 
 Flight.find_or_create_by!(departure_airport: yyc, arrival_airport: yeg, start: DateTime.new(2025, 4, 5, 17, 0, 0), duration: 60*60)
+Flight.find_or_create_by!(departure_airport: yyc, arrival_airport: yeg, start: DateTime.new(2025, 4, 5, 5, 0, 0), duration: 60*60)
 Flight.find_or_create_by!(departure_airport: yeg, arrival_airport: yyc, start: DateTime.new(2025, 4, 5, 18, 30, 0), duration: 60*60)
 Flight.find_or_create_by!(departure_airport: yyc, arrival_airport: yvr, start: DateTime.new(2025, 4, 6, 17, 30, 0), duration: 100*60)
 Flight.find_or_create_by!(departure_airport: yvr, arrival_airport: yyc, start: DateTime.new(2025, 4, 7, 20, 00, 0), duration: 100*60)

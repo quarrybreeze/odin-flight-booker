@@ -3,6 +3,6 @@ class Flight < ApplicationRecord
   belongs_to :arrival_airport, class_name: "Airport"
 
   def departure_date_formatted
-    start.strftime("%m/%d/%Y")
+    start.strftime("%m%d%Y")
   end
 end

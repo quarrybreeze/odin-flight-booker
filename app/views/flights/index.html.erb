@@ -11,8 +11,19 @@
   <%= form.label "Number of Passengers" %>
   <%= form.select :num_tickets, options_for_select(1..4) %> <br>
 
-  <%= form.label "Departure Date" %>
+  <%= form.label :start %>
   <%= form.select(:start, @departure_date_options) %> <br>
 
   <%= form.submit "Search" %>
 <% end %>
+
+<% if @search_results && @search_results.any? %>
+<h3>Search results: </h3>
+  <% @search_results.each do |flight|%>
+    <p>Departing Airport: <%= flight.departure_airport.iata%></p>
+    <p>Arriving Airport: <%= flight.arrival_airport.iata%></p>
+    <p>Departure Date: <%= flight.start%></p><br>
+  <%end%>
+<%else%>
+  <p>No flights match your criteria.</p>
+<%end%>
