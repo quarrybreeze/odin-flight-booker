@@ -11,7 +11,7 @@
   <%= form.label "Number of Passengers" %>
   <%= form.select :num_tickets, options_for_select(1..4) %> <br>
 
-  <%= form.label :start %>
+  <%= form.label "Date" %>
   <%= form.select(:start, @departure_date_options) %> <br>
 
   <%= form.submit "Search" %>
@@ -19,11 +19,30 @@
 
 <% if @search_results && @search_results.any? %>
 <h3>Search results: </h3>
-  <% @search_results.each do |flight|%>
-    <p>Departing Airport: <%= flight.departure_airport.iata%></p>
-    <p>Arriving Airport: <%= flight.arrival_airport.iata%></p>
-    <p>Departure Date: <%= flight.start%></p><br>
-  <%end%>
-<%else%>
+  <%= form_with do |form| %>
+
+
+    <% @search_results.each do |flight|%>
+      <div class='flightresults'>
+        <div class='radio'>
+          <%= form.radio_button :flight_id, :flight_id%>
+        </div>
+        <div class='flightattributes'>
+          <%= form.label "Flight number: " + flight.id.to_s%> <br>
+          <%= form.hidden_field :num_tickets, value: @num_tickets%> 
+          Departing Airport: <%= flight.departure_airport.iata%> <br>
+          Arriving Airport: <%= flight.arrival_airport.iata%> <br>
+          Departure Date: <%= flight.start%>
+        </div>
+      </div>
+    <%end%>
+
+    <%= form.submit "Book" %>
+  <% end %>
+
+<%elsif @search_results %>
   <p>No flights match your criteria.</p>
+<%else%>
+
 <%end%>
+

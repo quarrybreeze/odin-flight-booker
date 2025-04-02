@@ -8,3 +8,13 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ .flightresults {
+  display: flex;
+  border-style: solid;
+  margin: 2rem;
+ }
+
+ .radio {
+  align-self: center;
+ }
