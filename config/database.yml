@@ -23,7 +23,8 @@ default: &default
 development:
   <<: *default
   database: odin_flight_booker_development
-
+  username: terrence
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
@@ -81,18 +82,17 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: odin_flight_booker_production
-    username: odin_flight_booker
-    password: <%= ENV["ODIN_FLIGHT_BOOKER_DATABASE_PASSWORD"] %>
+    url: <%= ENV['DATABASE_URL'] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   cache:
     <<: *primary_production
-    database: odin_flight_booker_production_cache
-    migrations_paths: db/cache_migrate
+    url: <%= ENV['DATABASE_URL'] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   queue:
     <<: *primary_production
-    database: odin_flight_booker_production_queue
-    migrations_paths: db/queue_migrate
+    url: <%= ENV['DATABASE_URL'] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   cable:
     <<: *primary_production
-    database: odin_flight_booker_production_cable
-    migrations_paths: db/cable_migrate
+    url: <%= ENV['DATABASE_URL'] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
