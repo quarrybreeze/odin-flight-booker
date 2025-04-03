@@ -1,35 +1,35 @@
 <h1>Flights#index</h1>
 <p>Find me in app/views/flights/index.html.erb</p>
 
-<%= form_with url: flights_path, method: :get do |form|  %>
+<%= form_with url: flights_path, method: :get, scope: :flight do |form|  %>
   <%= form.label :departure_airport_id%>
-  <%= form.select(:departure_airport_id, @departing_airport_options) %> <br>
+  <%= form.select :departure_airport_id, @departing_airport_options, { selected: params[:flight]&.[](:departure_airport_id) } %> <br>
 
   <%= form.label :arrival_airport_id%>
-  <%= form.select(:arrival_airport_id, @arriving_airport_options) %> <br>
+  <%= form.select :arrival_airport_id, @arriving_airport_options, { selected: params[:flight]&.[](:arrival_airport_id) } %> <br>
 
   <%= form.label "Number of Passengers" %>
-  <%= form.select :num_tickets, options_for_select(1..4) %> <br>
+  <%= form.select :num_tickets, options_for_select(1..4, selected: params[:flight]&.[](:num_tickets)) %> <br>
 
   <%= form.label "Date" %>
-  <%= form.select(:start, @departure_date_options) %> <br>
+  <%= form.select :start, @departure_date_options, { selected: params[:flight]&.[](:start) } %> <br>
 
   <%= form.submit "Search" %>
 <% end %>
 
 <% if @search_results && @search_results.any? %>
 <h3>Search results: </h3>
-  <%= form_with do |form| %>
+  <%= form_with url: new_booking_path, method: :get, scope: :booking do |form| %>
 
 
     <% @search_results.each do |flight|%>
       <div class='flightresults'>
         <div class='radio'>
-          <%= form.radio_button :flight_id, :flight_id%>
+          <%= form.radio_button :flight_id, flight.id%>
         </div>
         <div class='flightattributes'>
           <%= form.label "Flight number: " + flight.id.to_s%> <br>
-          <%= form.hidden_field :num_tickets, value: @num_tickets%> 
+          <%= form.hidden_field :num_passengers, value: @num_tickets%> 
           Departing Airport: <%= flight.departure_airport.iata%> <br>
           Arriving Airport: <%= flight.arrival_airport.iata%> <br>
           Departure Date: <%= flight.start%>
