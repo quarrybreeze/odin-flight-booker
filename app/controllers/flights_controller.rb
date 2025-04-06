@@ -2,7 +2,7 @@ class FlightsController < ApplicationController
   def index
     @departing_airport_options = Airport.all.map { |a| [ a.iata, a.id ] }
     @arriving_airport_options = Airport.all.map { |a| [ a.iata, a.id ] }
-    @departure_date_options = Flight.all.map { |flight| [ flight.start.strftime("%Y-%m-%d"), flight.start.to_date ] }.uniq { |date_str, id| date_str }
+    @departure_date_options = Flight.all.map { |flight| [ flight.start.strftime("%Y-%m-%d"), flight.start.to_date] }.sort_by { |date_str, date| date }.uniq { |date_str, date| date_str }
 
     if params[:flight].present?
       flight_params = params[:flight]
