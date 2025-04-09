@@ -10,6 +10,9 @@ To: <%= @booking.flight.arrival_airport.iata%> <br><br>
 
 Passenger details: <br>
 <% @passengers.each do |passenger|%>
+  <% passenger_id = passenger.id %>
   <li>Name: <%= passenger.name%></li>
   <li>Email: <%= passenger.email%></li>
+  <%= link_to "Remove Passenger", passenger_path(passenger_id), data: { "turbo-method": :delete } %>
 <%end%>
+
