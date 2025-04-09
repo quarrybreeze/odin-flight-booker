@@ -22,8 +22,8 @@ Passenger details: <br>
 <br>
 
 <div data-controller="toggle"
-  data-toggle-primary-class="text-primary">
-  <div data-toggle-target="button" class="hideable">
+  data-toggle-primary-class="hidden">
+  <div data-toggle-target="button">
   <% booking = @booking.id %>
   <%= form_with model: @passenger do |f| %>
     <%= f.hidden_field :booking_id, value: booking%> 
@@ -35,12 +35,12 @@ Passenger details: <br>
     <%= f.submit "Add Passenger" %>
     
   <% end %>
-  <button class="hideable" data-toggle-target="button" data-action="toggle#clicked">
+  <button data-toggle-target="button" data-action="toggle#clicked">
     Undo
   </button>
   </div>
 
-  <button class="hideable" data-toggle-target="button2" data-action="toggle#clicked">
+  <button data-toggle-target="button2" data-action="toggle#clicked">
     Add Passenger
   </button>
 </div>

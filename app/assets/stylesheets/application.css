@@ -19,10 +19,6 @@
   align-self: center;
  }
 
- .hideable.text-primary {
+.hidden {
   display: none;
-}
-
-.hideable {
-  display: block;
 }
