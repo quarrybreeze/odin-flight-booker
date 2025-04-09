@@ -18,3 +18,11 @@
  .radio {
   align-self: center;
  }
+
+ .hideable.text-primary {
+  display: none;
+}
+
+.hideable {
+  display: block;
+}
