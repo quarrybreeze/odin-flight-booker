@@ -1,0 +1,14 @@
+Welcome aboard, <%= @passenger.name %>!
+=======================================
+
+You have successfully booked a seat on flight #<%= @passenger.booking.flight.id %>.
+
+You are flying from <%= @passenger.booking.flight.departure_airport.iata %> at <%= @passenger.booking.flight.start %>.
+
+You will arrive in <%= @passenger.booking.flight.arrival_airport.iata %> after approximately <%= @passenger.booking.flight.duration / 60 / 60 %> hours.
+
+========================================
+Thanks for flying and have a great day!
+
+Regards,
+Airline
