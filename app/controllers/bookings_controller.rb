@@ -18,20 +18,10 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-
-    respond_to do |format|
-      if @booking.save
-        @passengers = @booking.passengers
-        @passengers.each do |passenger|
-          PassengerMailer.with(passenger: passenger).confirmation_email.deliver_later
-        end
-
-        format.html { redirect_to booking_path(@booking), notice: "Booking was created successfully" }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      redirect_to booking_path(@booking), notice: "Booking was created successfully"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
